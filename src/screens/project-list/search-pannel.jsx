@@ -1,25 +1,10 @@
-import { useState, useEffect } from "react";
-
-export const SearchPannel = () => {
-  const [param, setParam] = useState({
-    name: "",
-    personId: "",
-  });
-  const [users, setUsers] = useState([]);
-  const [list, setList] = useState([]);
-  useEffect(() => {
-    fetch("").then(async (res) => {
-      if (res.ok) {
-        setList(await res.json());
-      }
-    });
-  });
+export const SearchPannel = ({ param, setParam, users }) => {
   return (
     <form action="">
       <div>
         <input
           type="text"
-          value={param}
+          value={param.name}
           onChange={(evt) => {
             setParam({
               ...param,
@@ -38,7 +23,9 @@ export const SearchPannel = () => {
         >
           <option value="">负责人</option>
           {users.map((user) => (
-            <option value={user.id}>{user.name}</option>
+            <option value={user.id} key={user.id}>
+              {user.name}
+            </option>
           ))}
         </select>
       </div>
