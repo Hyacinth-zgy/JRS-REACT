@@ -1,4 +1,6 @@
-export const List = ({ list, users }) => {
+import React from "react";
+import { listProps } from "utils/interface";
+export const List = ({ list, users }: listProps) => {
   return (
     <table>
       <thead>

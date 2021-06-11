@@ -1,4 +1,6 @@
-export const SearchPannel = ({ param, setParam, users }) => {
+import React from "react";
+import { SearchPanelProps } from "utils/interface";
+export const SearchPannel = ({ param, setParam, users }: SearchPanelProps) => {
   return (
     <form action="">
       <div>
