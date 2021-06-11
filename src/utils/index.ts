@@ -38,3 +38,20 @@ export const useDebounce = <V>(value: V, delay = 300) => {
 };
 
 // unkown不能赋值给任何一个值
+
+// 自己实现useArray
+export const useArray = <V>(value: V[]) => {
+  const [valueState, setValueState] = useState(value);
+  const add = (addValue: V) => {
+    setValueState([...valueState, addValue]);
+  };
+  const clear = () => {
+    setValueState([]);
+  };
+  const deleteFirt = () => {
+    let value = [...valueState];
+    value.unshift();
+    setValueState(value);
+  };
+  return [valueState, add, clear, deleteFirt];
+};
