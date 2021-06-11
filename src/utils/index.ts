@@ -24,7 +24,7 @@ export const useMount = (callBack: () => void) => {
 
 // 使用了这里useEffect得到了value依赖后就会一直做处理
 // 自己手动制定返回值为any
-export const useDebounce = (value: unknown, delay = 300): any => {
+export const useDebounce = <V>(value: V, delay = 300) => {
   const [params, setParams] = useState(value);
   useEffect(() => {
     const timeId = setTimeout(() => {
@@ -36,3 +36,5 @@ export const useDebounce = (value: unknown, delay = 300): any => {
   }, [value, delay]);
   return params;
 };
+
+// unkown不能赋值给任何一个值
