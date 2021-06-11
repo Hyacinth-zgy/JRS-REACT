@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const isVoid = (value: any) =>
+export const isVoid = (value: unknown) =>
   value === undefined || value === null || value === "";
 
 export const cleanObject = (object: object) => {
@@ -23,7 +23,8 @@ export const useMount = (callBack: () => void) => {
 };
 
 // 使用了这里useEffect得到了value依赖后就会一直做处理
-export const useDebounce = (value: any, delay = 300) => {
+// 自己手动制定返回值为any
+export const useDebounce = (value: unknown, delay = 300): any => {
   const [params, setParams] = useState(value);
   useEffect(() => {
     const timeId = setTimeout(() => {
