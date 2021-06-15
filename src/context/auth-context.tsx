@@ -13,7 +13,7 @@ export const AuthContext = createContext<
       user: User | null;
       login: (params: AuthForm) => Promise<void>;
       register: (params: AuthForm) => Promise<void>;
-      logout: (params: AuthForm) => Promise<void>;
+      logout: () => Promise<void>;
     }
   | undefined
 >(undefined);
