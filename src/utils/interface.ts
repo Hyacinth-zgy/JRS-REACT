@@ -28,3 +28,8 @@ export interface listProps {
   users: User[];
   list: Array<Project>;
 }
+
+export interface loginParams {
+  username: string;
+  password: string;
+}
