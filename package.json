@@ -24,7 +24,7 @@
     "eject": "react-scripts eject",
     "prettier": "npx prettier --write .",
     "prepare": "husky install",
-    "json:server": "json-server --watch ./__JSON_SERVER__MOKE/db.json --port 3004"
+    "json:server": "json-server --watch ./__JSON_SERVER__MOKE/db.json --port 3004 --middlewares ./__JSON_SERVER__MOKE/middleware.js"
   },
   "eslintConfig": {
     "extends": [

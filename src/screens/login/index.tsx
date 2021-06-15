@@ -1,11 +1,18 @@
 import React from "react";
-import { cleanObject } from "utils";
-import qs from "qs";
 import { loginParams } from "utils/interface";
 const url = process.env.REACT_APP_API_URL;
 export const LoginScreen = () => {
-  const login = (params: loginParams) => {
-    fetch(url + `/login?${qs.stringify(cleanObject(params))}`).then();
+  const login = (param: loginParams) => {
+    fetch(`${url}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(param),
+    }).then(async (response) => {
+      if (response.ok) {
+      }
+    });
   };
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
