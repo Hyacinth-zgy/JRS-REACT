@@ -11,8 +11,9 @@ export const handleUserResponse = ({ user }: { user: User }) => {
   return user;
 };
 
-export const login = (data: loginParams) => {
-  fetch(`${url}/login`, {
+export let login: (data: loginParams) => Promise<User | never>;
+login = (data: loginParams) => {
+  return fetch(`${url}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,12 +22,15 @@ export const login = (data: loginParams) => {
   }).then(async (response) => {
     if (response.ok) {
       return handleUserResponse(await response.json());
+    } else {
+      return Promise.reject(await response.json());
     }
   });
 };
 
-export const register = (data: loginParams) => {
-  fetch(`${url}/register`, {
+export let register: (data: loginParams) => Promise<User | never>;
+register = (data: loginParams) => {
+  return fetch(`${url}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -35,10 +39,12 @@ export const register = (data: loginParams) => {
   }).then(async (response) => {
     if (response.ok) {
       return handleUserResponse(await response.json());
+    } else {
+      return Promise.reject(await response.json());
     }
   });
 };
 
-export const logout = () => {
+export const logout = async () => {
   window.localStorage.removeItem(localStorageKey);
 };
