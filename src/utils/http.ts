@@ -1,12 +1,12 @@
 import qs from "qs";
 import * as auth from "auth-provider";
 import { useAuth } from "context/auth-context";
-import { Config } from "@testing-library/react";
 const url = process.env.REACT_APP_API_URL;
 interface configIn extends RequestInit {
   data?: object;
   token?: string;
 }
+
 export const http = async (
   endpoint: string,
   { data, token, headers, ...customConfig }: configIn = {}
