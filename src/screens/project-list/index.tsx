@@ -3,6 +3,7 @@ import { List } from "./list";
 import { useState, useEffect } from "react";
 import qs from "qs";
 import { cleanObject, useMount, useDebounce } from "utils/index";
+import { useHttp } from "utils/http";
 import React from "react";
 export const ProjectListScreen = () => {
   const [list, setList] = useState([]);
@@ -11,26 +12,15 @@ export const ProjectListScreen = () => {
     name: "",
     personId: "",
   });
+  const client = useHttp();
   const debounceValue = useDebounce(param);
   useEffect(() => {
-    const url = process.env.REACT_APP_API_URL;
-    fetch(url + `/projects?${qs.stringify(cleanObject(debounceValue))}`).then(
-      async (res) => {
-        if (res.ok) {
-          setList(await res.json());
-        }
-      }
-    );
+    client("projects", cleanObject(debounceValue)).then(setList);
   }, [debounceValue]);
 
   // 使用自定义hook
   useMount(() => {
-    const url = process.env.REACT_APP_API_URL;
-    fetch(url + "/users").then(async (res) => {
-      if (res.ok) {
-        setUsers(await res.json());
-      }
-    });
+    client("users").then(setUsers);
   });
   return (
     <div>

@@ -7,7 +7,7 @@ export const UnauthenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(false);
   return (
     <div>
-      {isRegister ? <LoginScreen /> : <RegisterScreen />}
+      {isRegister ? <RegisterScreen /> : <LoginScreen />}
       <button
         onClick={() => {
           setIsRegister(!isRegister);

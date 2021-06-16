@@ -1,6 +1,8 @@
 import React, { useState, createContext, useContext, ReactNode } from "react";
 import { User } from "utils/interface";
 import * as auth from "auth-provider";
+import { http } from "utils/http";
+import { useMount } from "utils";
 
 interface AuthForm {
   username: string;
@@ -33,6 +35,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(null);
     });
   };
+  useMount(() => {
+    initUser().then(setUser);
+  });
   const state = {
     user,
     login,
@@ -49,4 +54,14 @@ export const useAuth = () => {
     throw new Error("useAuth必须在AuthProvider中使用");
   }
   return context;
+};
+
+const initUser = async () => {
+  let user = null;
+  const token = auth.getToken();
+  if (token) {
+    const data = await http("me", { token });
+    user = data.user;
+  }
+  return user;
 };
